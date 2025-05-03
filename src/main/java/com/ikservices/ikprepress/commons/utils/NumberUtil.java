@@ -1,5 +1,7 @@
 package com.ikservices.ikprepress.commons.utils;
 
+import com.ikservices.ikprepress.commons.constants.IKConstant;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -26,16 +28,15 @@ public class NumberUtil {
         return new BigDecimal(value);
     }
 
-//    public static String parseStringMoney(BigDecimal value) {
-//        Locale locale = Objects.nonNull(Constants.getLOCALE()) ? Constants.getLOCALE() : new Locale("pt", "BR");
-//        NumberFormat numberFormat = DecimalFormat.getCurrencyInstance(locale);
-//
-//        if (Objects.isNull(value)) {
-//            return numberFormat.format(0.0);
-//        }
-//
-//        return numberFormat.format(value);
-//    }
+    public static String parseStringMoney(BigDecimal value) {
+        NumberFormat numberFormat = DecimalFormat.getCurrencyInstance(IKConstant.LOCALE);
+
+        if (Objects.isNull(value)) {
+            return numberFormat.format(0.0);
+        }
+
+        return numberFormat.format(value);
+    }
 
     public static String parseStringNumber(String value) {
         if (Objects.isNull(value) || value.isEmpty()) {

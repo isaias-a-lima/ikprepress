@@ -14,6 +14,7 @@ import com.ikservices.ikprepress.users.domain.repository.UserRepository;
 @PropertySource(name = "users.properties", value = "classpath:users.properties", encoding = "UTF-8")
 public class UserConfig {
 
+	@Bean
 	public UserRepository getRepository(UserRepositoryJPA jpa) {
 		return new UserRepositoryImpl(jpa);
 	}
