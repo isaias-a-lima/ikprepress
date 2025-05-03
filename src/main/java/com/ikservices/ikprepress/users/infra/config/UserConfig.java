@@ -1,6 +1,7 @@
 package com.ikservices.ikprepress.users.infra.config;
 
 import com.ikservices.ikprepress.users.application.usecase.ListUser;
+import com.ikservices.ikprepress.users.infra.mapper.UserMapper;
 import com.ikservices.ikprepress.users.infra.persistence.UserRepositoryImpl;
 import com.ikservices.ikprepress.users.infra.persistence.UserRepositoryJPA;
 import org.springframework.context.annotation.Bean;
@@ -15,18 +16,23 @@ import com.ikservices.ikprepress.users.domain.repository.UserRepository;
 public class UserConfig {
 
 	@Bean
-	public UserRepository getRepository(UserRepositoryJPA jpa) {
-		return new UserRepositoryImpl(jpa);
+	public UserRepository getRepository(UserRepositoryJPA jpa, UserMapper userMapper) {
+		return new UserRepositoryImpl(jpa, userMapper);
 	}
 
 	@Bean
-	public SaveUser saveUser(UserRepository repository) {
+	public SaveUser getSaveUser(UserRepository repository) {
 		return new SaveUser(repository);
 	}
 
 	@Bean
 	public ListUser getListUser(UserRepository repository) {
 		return new ListUser(repository);
+	}
+	
+	@Bean
+	public UserMapper getUserMapper() {
+		return new UserMapper();
 	}
 
 }
