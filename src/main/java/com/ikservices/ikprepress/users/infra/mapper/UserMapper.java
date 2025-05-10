@@ -14,8 +14,8 @@ public class UserMapper extends IKMapper<UserDTO, User, UserEntity, UserDTO>{
 		
 		user.setUserId(request.getUserId());
 		user.setIdDoc(request.getIdDoc());
-		user.setUserEmail(request.getUserEmail());
 		user.setUserName(request.getUserName());
+		user.setUserEmail(request.getUserEmail());
 		user.setUserPassword(request.getUserPassword());
 		user.setCreationDate(DateUtil.parseToLocalDate(request.getCreationDate()));
 		user.setActivated(request.getActivated());
@@ -30,6 +30,7 @@ public class UserMapper extends IKMapper<UserDTO, User, UserEntity, UserDTO>{
 		
 		userEntity.setUserId(domain.getUserId());
 		userEntity.setIdDoc(domain.getIdDoc());
+		userEntity.setUserName(domain.getUserName());
 		userEntity.setUserEmail(domain.getUserEmail());
 		userEntity.setUserPassword(domain.getUserPassword());
 		userEntity.setCreationDate(domain.getCreationDate());
@@ -45,6 +46,7 @@ public class UserMapper extends IKMapper<UserDTO, User, UserEntity, UserDTO>{
 		
 		user.setUserId(entity.getUserId());
 		user.setIdDoc(entity.getIdDoc());
+		user.setUserName(entity.getUserName());
 		user.setUserEmail(entity.getUserEmail());
 		user.setUserPassword(entity.getUserPassword());
 		user.setCreationDate(entity.getCreationDate());
@@ -60,6 +62,7 @@ public class UserMapper extends IKMapper<UserDTO, User, UserEntity, UserDTO>{
 		
 		userDTO.setUserId(domain.getUserId());
 		userDTO.setIdDoc(domain.getIdDoc());
+		userDTO.setUserName(domain.getUserName());
 		userDTO.setUserEmail(domain.getUserEmail());
 		userDTO.setUserPassword(domain.getUserPassword());
 		userDTO.setCreationDate(domain.getCreationDate().toString());
