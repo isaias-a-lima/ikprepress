@@ -21,7 +21,8 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> listUser() {
-        return null;
+    public List<User> listUser(Boolean activated) {
+        List<UserEntity> users = jpa.findByActivated(activated);
+        return userMapper.parseEntityToDomainList(users);
     }
 }
