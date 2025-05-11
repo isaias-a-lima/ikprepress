@@ -12,7 +12,7 @@ public class ListUser {
         this.repository = repository;
     }
 
-    public List<User> execute() {
-        return repository.listUser();
+    public List<User> execute(Boolean activated) {
+        return repository.listUser(activated);
     }
 }
