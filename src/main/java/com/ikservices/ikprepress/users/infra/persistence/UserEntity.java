@@ -1,6 +1,7 @@
 package com.ikservices.ikprepress.users.infra.persistence;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,4 +46,22 @@ public class UserEntity {
 	
 	@Column(name = "ACTIVATED")
 	private Boolean activated;
+	
+	public void update(UserEntity entity) {
+		if(Objects.nonNull(entity.getIdDoc())) {
+			this.idDoc = entity.getIdDoc();
+		}
+		if(Objects.nonNull(entity.getUserName())) {
+			this.userName = entity.getUserName();
+		}
+		if(Objects.nonNull(entity.getUserEmail())) {
+			this.userEmail = entity.getUserEmail();
+		}
+		if(Objects.nonNull(entity.getUserPassword())) {
+			this.userPassword = entity.getUserPassword();
+		}
+		if(Objects.nonNull(entity.getCreationDate())) {
+			this.activated = entity.getActivated();
+		}
+	}
 }
