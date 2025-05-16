@@ -25,4 +25,5 @@ public class IKConstant {
     public static String UPDATE_ERROR_MESSAGE = "";
     public static String DELETE_SUCCESS_MESSAGE = "";
     public static String DELETE_ERROR_MESSAGE = "";
+    public static String NOT_FOUND_MESSAGE = "";
 }

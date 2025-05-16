@@ -45,7 +45,9 @@ public class IKPropertyConfig {
     private String deleteSuccessMessage;
     @Value("${app.delete.success.message}")
     private String deleteErrorMessage;
-
+    @Value("${app.not.found.message}")
+    private String notFoundMessage;
+    
     @PostConstruct
     private void load() {
         //APP CONFIG
@@ -67,6 +69,7 @@ public class IKPropertyConfig {
         IKConstant.UPDATE_ERROR_MESSAGE = this.updateErrorMessage;
         IKConstant.DELETE_SUCCESS_MESSAGE = this.deleteSuccessMessage;
         IKConstant.DELETE_ERROR_MESSAGE = this.deleteErrorMessage;
+        IKConstant.NOT_FOUND_MESSAGE = this.notFoundMessage;
 
         LOGGER.info( "############## Loaded Properties ##############");
         LOGGER.info( "####");

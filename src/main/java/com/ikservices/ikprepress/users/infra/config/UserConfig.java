@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 import com.ikservices.ikprepress.users.application.usecase.SaveUser;
+import com.ikservices.ikprepress.users.application.usecase.UpdateUser;
 import com.ikservices.ikprepress.users.domain.repository.UserRepository;
 
 @Configuration
@@ -28,6 +29,11 @@ public class UserConfig {
 	@Bean
 	public ListUser getListUser(UserRepository repository) {
 		return new ListUser(repository);
+	}
+	
+	@Bean
+	public UpdateUser UpdateUser(UserRepository repository) {
+		return new UpdateUser(repository);
 	}
 	
 	@Bean

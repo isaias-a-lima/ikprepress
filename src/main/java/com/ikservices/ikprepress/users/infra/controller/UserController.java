@@ -3,6 +3,8 @@ package com.ikservices.ikprepress.users.infra.controller;
 import java.net.URI;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import com.ikservices.ikprepress.users.application.usecase.ListUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +20,7 @@ import com.ikservices.ikprepress.commons.response.IKResponse;
 import com.ikservices.ikprepress.commons.vo.IKMessageVO;
 import com.ikservices.ikprepress.users.application.dto.UserDTO;
 import com.ikservices.ikprepress.users.application.usecase.SaveUser;
+import com.ikservices.ikprepress.users.application.usecase.UpdateUser;
 import com.ikservices.ikprepress.users.domain.model.User;
 import com.ikservices.ikprepress.users.infra.mapper.UserMapper;
 
@@ -29,11 +32,13 @@ public class UserController {
 	private final UserMapper userMapper;
 	private final SaveUser saveUser;
 	private final ListUser listUser;
+	private final UpdateUser updateUser;
 	
-	public UserController(SaveUser saveUser, UserMapper userMapper, ListUser listUser) {
+	public UserController(SaveUser saveUser, UserMapper userMapper, ListUser listUser, UpdateUser updateUser) {
 		this.userMapper = userMapper;
 		this.saveUser = saveUser;
 		this.listUser = listUser;
+		this.updateUser = updateUser;
 	}
 	
 	@PostMapping
@@ -73,5 +78,21 @@ public class UserController {
 	@GetMapping("get/{userId}")
 	public ResponseEntity<IKResponse<UserDTO>> getUser(@PathVariable Long userId) {
 		return null;
+	}
+	
+	@PutMapping
+	@Transactional
+	public ResponseEntity<IKResponse<UserDTO>> updateUser(@RequestBody UserDTO userDTO) {
+		try {
+			User user = this.updateUser.execute(userMapper.parseRequestToDomain(userDTO));
+			return ResponseEntity.ok(IKResponse.<UserDTO>build().body(userMapper.parseDomainToResponse(user)));			
+		} catch (IKExceptions ike) {
+			LOGGER.warn(ike.getMessage(), ike);
+			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(IKResponse.<UserDTO>build().addMessage(ike.getIkMessage()));
+		} catch	(Exception e) {
+			LOGGER.error(e.getMessage(), e);
+			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(IKResponse.<UserDTO>build().addMessage(
+					new IKMessageVO(IKConstant.DEFAULT_ERROR_CODE, IKMessageTypeEnum.ERROR, IKConstant.UPDATE_ERROR_MESSAGE)));
+		}
 	}
 }

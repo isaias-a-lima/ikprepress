@@ -1,6 +1,7 @@
 package com.ikservices.ikprepress.users.infra.persistence;
 
 import com.ikservices.ikprepress.commons.constants.IKConstant;
+import com.ikservices.ikprepress.commons.enumerates.IKMessageTypeEnum;
 import com.ikservices.ikprepress.commons.exceptions.IKExceptions;
 import com.ikservices.ikprepress.commons.vo.IKMessageVO;
 import com.ikservices.ikprepress.users.domain.model.User;
@@ -35,7 +36,7 @@ public class UserRepositoryImpl implements UserRepository {
 		Optional<UserEntity> optional = this.jpa.findById(user.getUserId());
 		
 		if(!optional.isPresent()) {
-			throw new IKExceptions("Not found");
+			throw new IKExceptions(new IKMessageVO(IKConstant.DEFAULT_ERROR_CODE, IKMessageTypeEnum.WARNING, IKConstant.NOT_FOUND_MESSAGE));
 		}
 		
 		UserEntity entity = optional.get();
